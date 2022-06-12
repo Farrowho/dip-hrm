@@ -1,0 +1,32 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="main-block" style="background-image: url({% static 'manager/img/black-jumba.jpg' %});">
+            <h2 style="margin-left: 53%;
+            padding: 15px;
+            background: rgba(60, 60, 60, 0.5);
+            border-radius: 5px;
+            width: 16%">Сотрудники</h2>
+    </div>
+<br><br>
+<div class="container text-center" style = "width: 72%; margin-left: 23%; margin-right: auto;">
+    <div class="row">
+    {% for department in departments %}
+    <div class="col-md-4">
+        <p class = 'btn btn-dark'><i class="fa-regular fa-folder-open"></i> {{ department.department_name }}</p>
+        <details><summary></summary>
+            {% for worker in workers %}
+                {% if department.department_id == worker.position.department_id %}
+                        <a href="{% url 'worker_detail' worker.worker_id %}">Личная карточка</a>
+                        <h5> {{ worker.fio }} </h5>
+                        <h6> {{ worker.position.position_name }}</h6>
+                        <h6> Табельный номер: {{ worker.card_number }}</h6><br>
+                {% endif %}
+            {% endfor %}
+        </details><br>
+    </div>
+        {% endfor %}
+    </div>
+</div> <br>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="main-block" style="background-image: url({% static 'manager/img/magma.jpg' %});">
+            <h2 style="margin-left: 53%;
+            padding: 15px;
+            background: rgba(60, 60, 60, 0.5);
+            border-radius: 5px;
+            width: 16%">Приказы</h2>
+    </div>
+<br><br>
+<table class="table table-hover table-bordered" style = "width: 70%; margin-left: 25%; margin-right: auto;">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Номер приказа</th>
+            <th scope="col">ФИО</th>
+            <th scope="col">Основание</th>
+            <th scope="col">Тип документа</th>
+            <th scope="col">Дата заявления</th>
+            <th scope="col">PDF</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {% for order in orders %}
+            <td>{{ order.order_number }}</td>
+            <td>{{ order.order.worker.fio }}</td>
+            <td>Номер заявления: {{ order.order.application_number }}</td>
+            <td>{{ order.order.document_type.document_type_name }}</td>
+            <td>{{ order.order_date }}</td>
+            <td>{{ order.order_pdf }}</td>
+        </tr>
+            {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

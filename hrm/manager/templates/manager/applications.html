@@ -1,0 +1,35 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="main-block" style="background-image: url({% static 'manager/img/applications.jpg' %});">
+            <h2 style="margin-left: 53%;
+            padding: 15px;
+            background: rgba(60, 60, 60, 0.5);
+            border-radius: 5px;
+            width: 16%">Заявления</h2>
+    </div>
+<br><br>
+<table class="table table-hover table-bordered" style = "width: 70%; margin-left: 25%; margin-right: auto;">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Номер заявления</th>
+            <th scope="col">ФИО</th>
+            <th scope="col">Тип документа</th>
+            <th scope="col">Дата заявления</th>
+            <th scope="col">PDF</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {% for app in applications %}
+            <td>{{ app.application_number }}</td>
+            <td>{{ app.worker.fio }}</td>
+            <td>{{ app.document_type.document_type_name }}</td>
+            <td>{{ app.application_date }}</td>
+            <td>{{ app.application_pdf_path }}</td>
+        </tr>
+            {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

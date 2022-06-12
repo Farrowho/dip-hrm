@@ -1,0 +1,45 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block content %}
+      <div class="main-block" style="background-image: url({% static 'manager/img/waterdetail.jpg' %});">
+            <h2 style="margin-left: 54%;
+            padding: 10px;
+            background: rgba(60, 60, 60, 0.5);
+            border-radius: 5px;
+            width: 16%">Карточка сотрудника</h2>
+    </div>
+<br>
+    <div class="box" style = "width: 72%;
+        margin-left: 24%; margin-right: auto;
+        border-radius: 5px;
+        padding-left: 25px;
+        padding-top: 25px;
+        border: 2px solid black;">
+        <h1> {{ workers.fio }} </h1><br>
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Общая информация: </h2><hr>
+                    <h6> Дата рождения: {{ workers.passports.birthday }}</h6><br>
+                    <h6> Адрес проживания: {{ workers.adress_fact }}</h6><br>
+                    <h6> Образование: {{ workers.education_type }}</h6><br>
+                    <h6> Профиль образования: {{ workers.education_spec }}</h6><br>
+                    <h6> ИНН: {{ workers.inn }}</h6><br>
+                    <h6> Номер трудовой книжки: {{ workers.work_book_number }}</h6><br>
+            </div>
+            <div class="col-md-6">
+                <h2>Рабочая информация: </h2><hr>
+                    <h6> Табельный номер: {{ workers.card_number }}</h6><br>
+                    <h6> Отдел: {{ workers.position.department }} </h6><br>
+                    <h6> Должность: {{ workers.position }}</h6><br>
+                    <h6> Дата начала работы: {{ workers.work_start_date }}</h6><br>
+                    <h6> Зарплата: {{ workers.position.salary }}</h6><br>
+            </div>
+            <div class="col-md-25">
+                <h2>Контактная информация:</h2><hr>
+                    <h6> Почта: {{ workers.mail }}</h6><br>
+                    <h6> Телефон: {{ workers.phone }}</h6><br>
+            </div>
+         </div>
+    </div><br>
+
+{% endblock %}

@@ -1,0 +1,96 @@
+
+a {
+    color:black;
+}
+
+div .center {
+    width: 60%;
+    margin-left: 30%;
+    margin-right: auto;
+}
+
+input{
+    width: 35%;
+}
+
+aside {
+    float: left;
+    background: white;
+    padding: 2.5%;
+    color: black;
+    border-right: 2px solid black;
+    position: fixed;
+    z-index: 999;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+aside ul { list-style:none;  padding: 0px;}
+
+aside a { text-decoration: none; }
+
+aside ul li {
+    color: black;
+    display: block;
+    margin-top: 20px;
+    transition: transform .6s ease;
+}
+
+aside ul li:hover, aside ul a:hover{
+    color: black;
+    text-decoration: none;
+    transform: scale(1.1);
+}
+
+div.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+details {
+cursor: pointer;
+}
+
+aside ul ul {
+display: none;
+top: 100%;
+}
+
+.to-be-changed {
+	display: none;
+}
+
+input[type=checkbox]:checked ~ .to-be-changed {
+	display:inherit;
+}
+
+			/* отображаем выпадающий список при наведении */
+aside ul li:focus > ul {
+display:inherit;
+}
+
+			/* первый уровень выпадающего списка */
+aside ul ul li {
+min-width:170px;
+float:none;
+display:list-item;
+position: relative;
+}
+
+.hide_check {
+display:none;
+}
+
+div.box {
+    background: rgba(240, 240, 240, 0.5); /* Белый фон с полупрозрачностью */
+}
+
+div.main-block {
+    height: 200px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    color: white;
+    padding: 60px;
+    border-bottom: 2px solid black;
+}
