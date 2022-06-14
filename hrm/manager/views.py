@@ -2,21 +2,14 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Applications, Contracts, Departments, \
     DocumentsTypes, EducationType, Log, Orders, \
     Passports, Positions, Workers
-from .forms import NewWorkerForm, PassportForm
+from .forms import NewWorkerForm, PassportForm, NewAppForm, NewOrderForm, NewContractForm
 from django.http import HttpResponse
 
 
 def home(request):
     """Рендер главной страницы"""
-    applications = Applications.objects.all()
-    contracts = Contracts.objects.all()
     departments = Departments.objects.all()
-    documents_types = DocumentsTypes.objects.all()
-    education_type = EducationType.objects.all()
-    log = Log.objects.all()
-    orders = Orders.objects.all()
     passports = Passports.objects.all()
-    positions = Positions.objects.all()
     workers = Workers.objects.all()
     return render(request, 'manager/home.html', {'workers': workers,
                                                  'passports': passports,
@@ -83,3 +76,50 @@ def orders(request):
     orders = Orders.objects.all()
     context = {'orders': orders}
     return render(request, 'manager/orders.html', context)
+
+
+def contracts(request):
+    contracts = Contracts.objects.all()
+    context = {'contracts': contracts}
+    return render(request, 'manager/contracts.html', context)
+
+
+def order_print(request, worker_id):
+    workers = get_object_or_404(Workers, pk=worker_id)
+    return render(request, 'manager/order_print.html', {'workers': workers})
+
+
+def new_app(request):
+    form = NewAppForm()
+    if request.method == 'POST':
+        form = NewAppForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+    context = {'form': form}
+    return render(request, 'manager/new_app.html', context)
+
+
+def new_order(request):
+    form = NewOrderForm()
+    if request.method == 'POST':
+        form = NewOrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+    context = {'form': form}
+    return render(request, 'manager/new_order.html', context)
+
+
+def new_contract(request):
+    form = NewContractForm()
+    if request.method == 'POST':
+        form = NewContractForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+    context = {'form': form}
+    return render(request, 'manager/new_contract.html', context)
+
+
+

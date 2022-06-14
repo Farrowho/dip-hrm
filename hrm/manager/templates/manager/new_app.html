@@ -1,0 +1,17 @@
+{% extends 'manager/base.html' %}
+
+{% block content %}
+
+<h2 style="margin-left: 45%; padding-top: 15px; padding-bottom: 10px;">Новое заявление</h2>
+<hr>
+<div style="margin-left: 45%;">
+    <form action="" method = 'post'>
+            {% csrf_token %}
+            {{form.as_p}}
+            <br>
+            <input type='submit' class="btn btn-info">
+    </form>
+</div>
+
+
+{% endblock %}

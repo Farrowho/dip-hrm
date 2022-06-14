@@ -13,6 +13,11 @@ urlpatterns = [
     path('applications/', views.applications, name='applications'),
     path('worker_detail/<int:worker_id>/', views.worker_detail, name='worker_detail'),
     path('orders/', views.orders, name='orders'),
+    path('order_print/<int:worker_id>/', views.order_print, name='order_print'),
+    path('new_order/', views.new_order, name='new_order'),
+    path('new_app/', views.new_app, name='new_app'),
+    path('contracts/', views.contracts, name='contracts'),
+    path('new_contract/', views.new_contract, name='new_contract')
 ]
 
 urlpatterns += [
