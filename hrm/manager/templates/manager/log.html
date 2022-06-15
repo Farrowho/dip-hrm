@@ -23,14 +23,14 @@
     </thead>
     <tbody>
         <tr>
-            {% for l in log %}
-            <td>{{ l.log_number }}</td>
-            <td>{{ l.log.order.worker.fio }}</td>
-            <td>{{ l.log.order.worker.position.position_name }}</td>
-            <td>{{ l.log.order_number }}</td>
-            <td>{{ l.log.order_date }}</td>
-            <td>{{ l.log.order.document_type.document_type_name }}</td>
-            <td>Заявление: {{ l.log.order.application_number }}</td>
+            {% for order in orders %}
+            <td>{{ order.order.application_id }}</td>
+            <td><a href="/worker_detail/{{ order.order.worker.worker_id }}" target="_blank">{{ order.order.worker.fio }}</a></td>
+            <td>{{ order.order.worker.position.position_name }}</td>
+            <td><a href="/media/{{ order.order_pdf }}" target="_blank">{{ order.order_number }}</a></td>
+            <td>{{ order.order_date }}</td>
+            <td>{{ order.order.document_type.document_type_name }}</td>
+            <td> Заявление: <a href="/media/{{ order.order.application_pdf_path }}" target="_blank">{{ order.order.application_number }}</a> </td>
         </tr>
             {% endfor %}
     </tbody>

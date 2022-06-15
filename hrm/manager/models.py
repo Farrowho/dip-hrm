@@ -7,7 +7,7 @@ class Applications(models.Model):
     document_type = models.ForeignKey('DocumentsTypes', models.DO_NOTHING)
     worker = models.ForeignKey('Workers', models.DO_NOTHING)
     application_date = models.DateField()
-    application_pdf_path = models.CharField(max_length=40)
+    application_pdf_path = models.FileField(upload_to='files/', null=True, verbose_name="")
 
     class Meta:
         managed = False
@@ -90,13 +90,16 @@ class Contracts(models.Model):
     contract_number = models.CharField(max_length=11)
     worker = models.ForeignKey('Workers', models.DO_NOTHING)
     status = models.IntegerField()
-    contract_pdf_path = models.CharField(max_length=50)
+    contract_pdf_path = models.FileField(upload_to='files/', null=True, verbose_name="")
 
     class Meta:
         managed = False
         db_table = 'contracts'
         verbose_name = 'договор'
         verbose_name_plural = 'Договоры'
+
+    def __str__(self):
+        return self.contract_number
 
 
 class Departments(models.Model):
@@ -110,7 +113,6 @@ class Departments(models.Model):
         verbose_name_plural = 'Отделы'
 
     def __str__(self):
-        '''Метод для нормального отображения заголовка значения в админке'''
         return self.department_name
 
 
@@ -170,7 +172,6 @@ class DocumentsTypes(models.Model):
         verbose_name_plural = 'Документы'
 
     def __str__(self):
-        '''Метод для нормального отображения заголовка значения в админке'''
         return self.document_type_name
 
 
@@ -185,7 +186,6 @@ class EducationType(models.Model):
         verbose_name_plural = 'Тип образования'
 
     def __str__(self):
-        '''Метод для нормального отображения заголовка значения в админке'''
         return self.education_type_name
 
 
@@ -199,12 +199,15 @@ class Log(models.Model):
         verbose_name = 'журнальную запись'
         verbose_name_plural = 'Журнал'
 
+    def __int__(self):
+        return self.log
+
 
 class Orders(models.Model):
     order = models.OneToOneField(Applications, models.DO_NOTHING, primary_key=True)
     order_number = models.IntegerField(unique=True)
     order_date = models.DateField()
-    order_pdf = models.CharField(max_length=40)
+    order_pdf = models.FileField(upload_to='files/', null=True, verbose_name="")
 
     class Meta:
         managed = False
@@ -231,8 +234,7 @@ class Passports(models.Model):
         verbose_name_plural = 'Паспорта'
 
     def __str__(self):
-        '''Метод для нормального отображения заголовка значения в админке'''
-        return self.passport
+        return self.nomer
 
 
 class Positions(models.Model):
@@ -247,9 +249,7 @@ class Positions(models.Model):
         verbose_name = 'должность'
         verbose_name_plural = 'Должности'
 
-
     def __str__(self):
-        '''Метод для нормального отображения заголовка значения в админке'''
         return self.position_name
 
 
@@ -275,5 +275,4 @@ class Workers(models.Model):
         verbose_name_plural = 'Работники'
 
     def __str__(self):
-        '''Метод для нормального отображения заголовка значения в админке'''
         return self.fio

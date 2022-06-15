@@ -23,10 +23,10 @@
         <tr>
             {% for app in applications %}
             <td>{{ app.application_number }}</td>
-            <td>{{ app.worker.fio }}</td>
+            <td><a href="/worker_detail/{{ app.worker.worker_id }}" target="_blank">{{ app.worker.fio }}</td>
             <td>{{ app.document_type.document_type_name }}</td>
             <td>{{ app.application_date }}</td>
-            <td>{{ app.application_pdf_path }}</td>
+            <td><a href="/media/{{ app.application_pdf_path }}" target="_blank"> Файл </a></td>
         </tr>
             {% endfor %}
     </tbody>

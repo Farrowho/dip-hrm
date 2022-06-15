@@ -24,11 +24,11 @@
         <tr>
             {% for order in orders %}
             <td>{{ order.order_number }}</td>
-            <td>{{ order.order.worker.fio }}</td>
-            <td>Номер заявления: {{ order.order.application_number }}</td>
+            <td><a href="/worker_detail/{{ order.order.worker.worker_id }}" target="_blank">{{ order.order.worker.fio }}</a></td>
+            <td> Номер заявления: <a href="/media/{{ order.order.application_pdf_path }}" target="_blank"> {{ order.order.application_number }} </a></td>
             <td>{{ order.order.document_type.document_type_name }}</td>
             <td>{{ order.order_date }}</td>
-            <td>{{ order.order_pdf }}</td>
+            <td><a href="/media/{{ order.order_pdf }}" target="_blank"> Файл </a></td>
         </tr>
             {% endfor %}
     </tbody>

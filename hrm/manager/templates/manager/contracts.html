@@ -24,11 +24,11 @@
         <tr>
             {% for contract in contracts %}
             <td>{{ contract.contract_number }}</td>
-            <td>{{ contract.worker.fio }}</td>
+            <td><a href="/worker_detail/{{ contract.worker.worker_id }}" target="_blank">{{ contract.worker.fio }}</td>
             <td>{{ contract.worker.position.department }}</td>
             <td>{{ contract.worker.position }}</td>
             <td>{{ contract.status }}</td>
-            <td>{{ contract.contract_pdf_path }}</td>
+            <td><a href="/media/{{ contract.contract_pdf_path }}" target="_blank"> Файл </a></td>
         </tr>
             {% endfor %}
     </tbody>

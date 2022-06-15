@@ -94,3 +94,7 @@ div.main-block {
     padding: 60px;
     border-bottom: 2px solid black;
 }
+
+td, tr, th {
+    border: 2px solid black;
+}

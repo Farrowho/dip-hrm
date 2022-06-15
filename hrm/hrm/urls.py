@@ -18,7 +18,7 @@ urlpatterns = [
     path('new_app/', views.new_app, name='new_app'),
     path('contracts/', views.contracts, name='contracts'),
     path('new_contract/', views.new_contract, name='new_contract')
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),

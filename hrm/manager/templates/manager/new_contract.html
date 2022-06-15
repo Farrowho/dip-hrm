@@ -5,11 +5,11 @@
 <h2 style="margin-left: 45%; padding-top: 15px; padding-bottom: 10px;">Новый договор</h2>
 <hr>
 <div style="margin-left: 45%;">
-    <form action="" method = 'post'>
+    <form enctype="multipart/form-data" method = 'POST' action="">
             {% csrf_token %}
             {{form.as_p}}
             <br>
-            <input type='submit' class="btn btn-info">
+            <input type='submit' class="btn btn-info" value="Отправить"/>
     </form>
 </div>
 

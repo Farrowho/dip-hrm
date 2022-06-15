@@ -92,7 +92,7 @@ def order_print(request, worker_id):
 def new_app(request):
     form = NewAppForm()
     if request.method == 'POST':
-        form = NewAppForm(request.POST)
+        form = NewAppForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
 
@@ -103,7 +103,7 @@ def new_app(request):
 def new_order(request):
     form = NewOrderForm()
     if request.method == 'POST':
-        form = NewOrderForm(request.POST)
+        form = NewOrderForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
 
@@ -114,7 +114,7 @@ def new_order(request):
 def new_contract(request):
     form = NewContractForm()
     if request.method == 'POST':
-        form = NewContractForm(request.POST)
+        form = NewContractForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
 
