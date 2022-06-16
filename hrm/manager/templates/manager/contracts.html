@@ -18,17 +18,19 @@
             <th scope="col">Должность</th>
             <th scope="col">Статус</th>
             <th scope="col">PDF</th>
+            <th scope="col"> < </th>
         </tr>
     </thead>
     <tbody>
         <tr>
             {% for contract in contracts %}
             <td>{{ contract.contract_number }}</td>
-            <td><a href="/worker_detail/{{ contract.worker.worker_id }}" target="_blank">{{ contract.worker.fio }}</td>
+            <td><a href="/worker_detail/{{ contract.worker.worker_id }}" target="_blank">{{ contract.worker.fio }}</a></td>
             <td>{{ contract.worker.position.department }}</td>
             <td>{{ contract.worker.position }}</td>
             <td>{{ contract.status }}</td>
             <td><a href="/media/{{ contract.contract_pdf_path }}" target="_blank"> Файл </a></td>
+            <td><a href="/new_contract/{{ contract.contract_id }}" target="_blank"><i class="fa-regular fa-pen-to-square"></i></a></td>
         </tr>
             {% endfor %}
     </tbody>

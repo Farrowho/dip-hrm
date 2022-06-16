@@ -18,6 +18,7 @@
             <th scope="col">Тип документа</th>
             <th scope="col">Дата заявления</th>
             <th scope="col">PDF</th>
+            <th scope="col"><</th>
         </tr>
     </thead>
     <tbody>
@@ -29,6 +30,7 @@
             <td>{{ order.order.document_type.document_type_name }}</td>
             <td>{{ order.order_date }}</td>
             <td><a href="/media/{{ order.order_pdf }}" target="_blank"> Файл </a></td>
+            <td><a href="/new_order/{{ order.order.application_id }}" target="_blank"><i class="fa-regular fa-pen-to-square"></i></a></td>
         </tr>
             {% endfor %}
     </tbody>

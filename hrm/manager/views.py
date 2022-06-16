@@ -17,7 +17,6 @@ def home(request):
 
 
 def new_worker(request):
-    """Рендер страницы с формой оформления нового сотрудника (шаг 1)"""
     form = NewWorkerForm()
     if request.method == 'POST':
         form = NewWorkerForm(request.POST)
@@ -28,8 +27,17 @@ def new_worker(request):
     return render(request, 'manager/new_worker.html', context)
 
 
+def edit_worker(request, worker_id):
+    worker = get_object_or_404(Workers, pk=worker_id)
+    form = NewWorkerForm(request.POST or None, instance=worker)
+    if form.is_valid():
+        form.save()
+
+    context = {'form': form}
+    return render(request, 'manager/new_worker.html', context)
+
+
 def new_worker2(request):
-    """Рендер страницы с формой оформления нового сотрудника (шаг 2)"""
     form = PassportForm()
     if request.method == 'POST':
         form = PassportForm(request.POST)
@@ -100,12 +108,32 @@ def new_app(request):
     return render(request, 'manager/new_app.html', context)
 
 
+def edit_app(request, application_id):
+    app = get_object_or_404(Applications, pk=application_id)
+    form = NewAppForm(request.POST or None, request.FILES or None, instance=app)
+    if form.is_valid():
+        form.save()
+
+    context = {'form': form}
+    return render(request, 'manager/new_app.html', context)
+
+
 def new_order(request):
     form = NewOrderForm()
     if request.method == 'POST':
         form = NewOrderForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+
+    context = {'form': form}
+    return render(request, 'manager/new_order.html', context)
+
+
+def edit_order(request, order):
+    ord = get_object_or_404(Orders, pk=order)
+    form = NewOrderForm(request.POST or None, request.FILES or None, instance=ord)
+    if form.is_valid():
+        form.save()
 
     context = {'form': form}
     return render(request, 'manager/new_order.html', context)
@@ -121,5 +149,14 @@ def new_contract(request):
     context = {'form': form}
     return render(request, 'manager/new_contract.html', context)
 
+
+def edit_contract(request, contract_id):
+    contract = get_object_or_404(Contracts, pk=contract_id)
+    form = NewContractForm(request.POST or None, request.FILES or None, instance=contract)
+    if form.is_valid():
+        form.save()
+
+    context = {'form': form}
+    return render(request, 'manager/new_contract.html', context)
 
 

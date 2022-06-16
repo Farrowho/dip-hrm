@@ -7,8 +7,11 @@
             background: rgba(60, 60, 60, 0.5);
             border-radius: 5px;
             width: 16%">Заявления</h2>
+    </div><p></p>
+    <div class="second-block">
+        <a style="margin: 53%;"><button class="btn btn-dark">Добавить заявление # сортировки</button></a>
     </div>
-<br><br>
+    <br><br>
 <table class="table table-hover table-bordered" style = "width: 70%; margin-left: 25%; margin-right: auto;">
     <thead class="thead-dark">
         <tr>
@@ -17,16 +20,18 @@
             <th scope="col">Тип документа</th>
             <th scope="col">Дата заявления</th>
             <th scope="col">PDF</th>
+            <th scope="col">< </th>
         </tr>
     </thead>
     <tbody>
         <tr>
             {% for app in applications %}
             <td>{{ app.application_number }}</td>
-            <td><a href="/worker_detail/{{ app.worker.worker_id }}" target="_blank">{{ app.worker.fio }}</td>
+            <td><a href="/worker_detail/{{ app.worker.worker_id }}" target="_blank">{{ app.worker.fio }}</a></td>
             <td>{{ app.document_type.document_type_name }}</td>
             <td>{{ app.application_date }}</td>
             <td><a href="/media/{{ app.application_pdf_path }}" target="_blank"> Файл </a></td>
+            <td><a href="/new_app/{{ app.application_id }}" target="_blank"><i class="fa-regular fa-pen-to-square"></i></a></td>
         </tr>
             {% endfor %}
     </tbody>

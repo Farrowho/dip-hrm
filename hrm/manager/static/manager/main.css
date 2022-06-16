@@ -98,3 +98,8 @@ div.main-block {
 td, tr, th {
     border: 2px solid black;
 }
+
+div.second-block {
+    height: 60px;
+    border-bottom: 2px solid black;
+}
