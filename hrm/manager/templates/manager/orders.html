@@ -8,6 +8,28 @@
             border-radius: 5px;
             width: 16%">Приказы</h2>
     </div>
+    <form action="{% url 'filter_orders' %}" method="get">
+        <div class="second-block" style="background-image: url({% static 'manager/img/second-block.jpg' %});
+                                         background-size: cover;">
+            <ul class="horizontal">
+                    <li>
+                        <input type="checkbox" class="checked" style="width: 5%;" name="document_type" value="1">
+                        <span class="span editContent">Прием</span>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="checked" style="width: 5%;" name="document_type" value="2">
+                        <span class="span editContent">Перевод</span>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="checked" style="width: 5%;" name="document_type" value="3">
+                        <span class="span editContent">Увольнение</span>
+                    </li>
+                    <li>
+                        <button type="submit" class="btn btn-dark"> Найти </button>
+                    </li>
+            </ul>
+        </div>
+    </form>
 <br><br>
 <table class="table table-hover table-bordered" style = "width: 70%; margin-left: 25%; margin-right: auto;">
     <thead class="thead-dark">

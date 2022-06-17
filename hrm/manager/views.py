@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.db.models import Q
 from .models import Applications, Contracts, Departments, \
     DocumentsTypes, EducationType, Log, Orders, \
     Passports, Positions, Workers
@@ -49,29 +50,29 @@ def new_worker2(request):
 
 
 def log(request):
-    log = Log.objects.all()
     orders = Orders.objects.all()
-    applications = Applications.objects.all()
-    workers = Workers.objects.all()
-    positions = Positions.objects.all()
-    documents_types = DocumentsTypes.objects.all()
-    context = {'log': log,
-               'orders': orders,
-               'applications': applications,
-               'workers': workers,
-               'positions': positions,
-               'documents_types': documents_types}
-    return render(request, 'manager/log.html', context)
+    queryset = Orders.objects.filter(
+        Q(order__document_type__in=request.GET.getlist("document_type"))
+    )
+    if queryset:
+        context = {'orders': queryset}
+        return render(request, 'manager/log.html', context)
+    else:
+        context = {'orders': orders}
+        return render(request, 'manager/log.html', context)
 
 
 def applications(request):
     applications = Applications.objects.all()
-    workers = Workers.objects.all()
-    documents_types = DocumentsTypes.objects.all()
-    context = {'applications': applications,
-               'workers': workers,
-               'documents_types': documents_types}
-    return render(request, 'manager/applications.html', context)
+    queryset = Applications.objects.filter(
+        Q(document_type__in=request.GET.getlist("document_type"))
+    )
+    if queryset:
+        context = {'applications': queryset}
+        return render(request, 'manager/applications.html', context)
+    else:
+        context = {'applications': applications}
+        return render(request, 'manager/applications.html', context)
 
 
 def worker_detail(request, worker_id):
@@ -82,8 +83,15 @@ def worker_detail(request, worker_id):
 
 def orders(request):
     orders = Orders.objects.all()
-    context = {'orders': orders}
-    return render(request, 'manager/orders.html', context)
+    queryset = Orders.objects.filter(
+        Q(order__document_type__in=request.GET.getlist("document_type"))
+    )
+    if queryset:
+        context = {'orders': queryset}
+        return render(request, 'manager/orders.html', context)
+    else:
+        context = {'orders': orders}
+        return render(request, 'manager/orders.html', context)
 
 
 def contracts(request):
@@ -158,5 +166,3 @@ def edit_contract(request, contract_id):
 
     context = {'form': form}
     return render(request, 'manager/new_contract.html', context)
-
-

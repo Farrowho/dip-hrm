@@ -22,6 +22,9 @@ urlpatterns = [
     path('contracts/', views.contracts, name='contracts'),
     path('new_contract/', views.new_contract, name='new_contract'),
     path('new_contract/<int:contract_id>/', views.edit_contract, name='edit_contract'),
+    path('applications/filter/', views.applications, name='filter'),
+    path('orders/filter/', views.orders, name='filter_orders'),
+    path('log/filter/', views.log, name='filter_log'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += [

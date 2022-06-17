@@ -101,5 +101,19 @@ td, tr, th {
 
 div.second-block {
     height: 60px;
+    margin-left: 360px;
+    margin-right: 70px;
     border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    padding: 11px;
 }
+
+ul.horizontal li {
+    display: inline; /* Отображать как строчный элемент */
+    padding: 10px;
+}
+
+
+
+
