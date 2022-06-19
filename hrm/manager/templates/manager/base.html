@@ -20,6 +20,7 @@
                 <li><input type="checkbox" id="toggle3" class = "hide_check"><label for="toggle3"><i class="fa-solid fa-person-rays"></i> Сотрудники </label>
                     <ul class="to-be-changed">
                             <li><a href="{% url 'home' %}"><button class = 'btn btn-dark'><i class="fa-regular fa-eye"></i> Просмотр сотрудников </button></a></li>
+                            <li><a href="{% url 'new_worker' %}"><button class = 'btn btn-dark'><i class="fa-regular fa-square-plus"></i> Новый сотрудник </button></a></li>
                             <li><a href="{% url 'new_worker2' %}"><button class = 'btn btn-dark'><i class="fa-regular fa-square-plus"></i> Добавить паспортные данные </button></a></li>
                     </ul>
                 <li><a href="{% url 'log' %}"><i class="fas fa-book"></i> Журнал </a></li>
@@ -37,15 +38,7 @@
                     <ul class="to-be-changed">
                             <li><a href="{% url 'contracts' %}"><button class = 'btn btn-dark'><i class="fa-regular fa-eye"></i> Посмотреть договоры </button></a></li>
                             <li><a href="{% url 'new_contract' %}"><button class = 'btn btn-dark'><i class="fa-regular fa-square-plus"></i> Добавить трудовой договор </button></a></li>
-
                     </ul>
-                <li><input type="checkbox" id="toggle" class = "hide_check"><label for="toggle"><i class="fa-regular fa-pen-to-square"></i> Оформление</label>
-                    <ul class="to-be-changed">
-                            <li><a href="{% url 'new_worker' %}"><button class = 'btn btn-dark'><i class="fa-regular fa-square-plus"></i> Новый сотрудник </button></a></li>
-                            <li><a href="{% url 'home' %}"><button class = 'btn btn-dark'><i class="fa-regular fa-share-from-square"></i> Перевод сотрудника </button></a></li>
-                            <li><a href="{% url 'home' %}"><button class = 'btn btn-dark'><i class="fa-regular fa-square-minus"></i></i> Увольнение сотрудника </button></a></li>
-                    </ul>
-                </li>
                 <hr>
                    {% if user.is_authenticated %}
                      <li>Профиль: {{ user.get_username }}</li>

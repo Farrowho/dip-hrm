@@ -8,7 +8,47 @@
             border-radius: 5px;
             width: 16%">Карточка сотрудника</h2>
     </div>
-<br>
+    <div class="second-block" style="background-image: url({% static 'manager/img/second-block.jpg' %});
+                                         background-size: cover;
+                                         height: 150px;
+                                         padding: 25px;">
+            <ul class="horizontal">
+                    <li>
+                        Шаблоны заявлений:
+                    </li>
+                    <li>
+                        <a href="/app_print/{{ workers.worker_id }}" target="_blank"><button class = 'btn btn-dark'> Прием </button></a>
+                    </li>
+                    <li>
+                        <a href="/app_per_print/{{ workers.worker_id }}" target="_blank"><button class = 'btn btn-dark'> Перевод </button></a>
+                    </li>
+                    <li>
+                        <a href="/app_uv_print/{{ workers.worker_id }}" target="_blank"><button class = 'btn btn-dark'> Увольнение </button></a>
+                    </li>
+                    <li>
+                        <a href="/new_worker/{{ workers.worker_id }}"><button class = 'btn btn-light'> Редактировать информацию о сотруднике </button></a><br><br>
+                    </li>
+                    <li>
+                        Шаблоны приказов:&nbsp&nbsp
+                    </li>
+                    <li>
+                        <a href="/order_print/{{ workers.worker_id }}" target="_blank"><button class = 'btn btn-dark'> Прием </button></a>
+                    </li>
+                    <li>
+                        <a href="/order_per_print/{{ workers.worker_id }}" target="_blank"><button class = 'btn btn-dark'> Перевод </button></a>
+                    </li>
+                    <li>
+                        <a href="/order_uv_print/{{ workers.worker_id }}" target="_blank"><button class = 'btn btn-dark'> Увольнение </button></a>
+                    </li>
+                    <li>
+                        <a href="/new_worker/{{ workers.worker_id }}"><button class = 'btn btn-light'> Оформ. перевода </button></a>
+                    </li>
+                    <li>
+                        <a href="/new_worker/{{ workers.worker_id }}"><button class = 'btn btn-light'> Оформ.увольнения </button></a>
+                    </li>
+            </ul>
+    </div>
+    <br>
     <div class="box" style = "width: 72%;
         margin-left: 24%; margin-right: auto;
         border-radius: 5px;

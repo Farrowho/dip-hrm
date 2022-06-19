@@ -130,6 +130,16 @@ def order_print(request, worker_id):
     return render(request, 'manager/order_print.html', {'workers': workers})
 
 
+def order_per_print(request, worker_id):
+    workers = get_object_or_404(Workers, pk=worker_id)
+    return render(request, 'manager/order_per_print.html', {'workers': workers})
+
+
+def order_uv_print(request, worker_id):
+    workers = get_object_or_404(Workers, pk=worker_id)
+    return render(request, 'manager/order_uv_print.html', {'workers': workers})
+
+
 def new_app(request):
     form = NewAppForm()
     if request.method == 'POST':
@@ -149,6 +159,21 @@ def edit_app(request, application_id):
 
     context = {'form': form}
     return render(request, 'manager/new_app.html', context)
+
+
+def app_print(request, worker_id):
+    workers = get_object_or_404(Workers, pk=worker_id)
+    return render(request, 'manager/app_print.html', {'workers': workers})
+
+
+def app_per_print(request, worker_id):
+    workers = get_object_or_404(Workers, pk=worker_id)
+    return render(request, 'manager/app_per_print.html', {'workers': workers})
+
+
+def app_uv_print(request, worker_id):
+    workers = get_object_or_404(Workers, pk=worker_id)
+    return render(request, 'manager/app_uv_print.html', {'workers': workers})
 
 
 def new_order(request):
@@ -191,3 +216,11 @@ def edit_contract(request, contract_id):
 
     context = {'form': form}
     return render(request, 'manager/new_contract.html', context)
+
+
+def perevod(request):
+    pass
+
+
+def uval(request):
+    pass
