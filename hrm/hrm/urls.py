@@ -20,6 +20,7 @@ urlpatterns = [
     path('new_app/', views.new_app, name='new_app'),
     path('new_app/<int:application_id>/', views.edit_app, name='edit_app'),
     path('contracts/', views.contracts, name='contracts'),
+    path('contracts/filter/', views.contracts, name='filter_contracts'),
     path('new_contract/', views.new_contract, name='new_contract'),
     path('new_contract/<int:contract_id>/', views.edit_contract, name='edit_contract'),
     path('applications/filter/', views.applications, name='filter'),

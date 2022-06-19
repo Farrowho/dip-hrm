@@ -8,8 +8,28 @@
             border-radius: 5px;
             width: 16%">Трудовые договоры</h2>
     </div>
-
-<br><br>
+<form action="{% url 'filter_contracts' %}" method="get">
+        <div class="second-block" style="background-image: url({% static 'manager/img/second-block.jpg' %});
+                                         background-size: cover;">
+            <ul class="horizontal">
+                    <li>
+                        <input type="checkbox" class="checked" style="width: 5%;" name="status" value="1">
+                        <span class="span editContent">Актуальные</span>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="checked" style="width: 5%;" name="status" value="0">
+                        <span class="span editContent">Неактуальные</span>
+                    </li>
+                    <li>
+                        <input type="text" name="search-order" placeholder="Введите текст для поиска">
+                    </li>
+                    <li>
+                        <button type="submit" class="btn btn-dark"> <i class="fa-solid fa-magnifying-glass"></i> Найти </button>
+                    </li>
+            </ul>
+        </div>
+    </form>
+<br>
 <table class="table table-hover table-bordered" style = "width: 70%; margin-left: 25%; margin-right: auto;">
     <thead class="thead-dark">
         <tr>

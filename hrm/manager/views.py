@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
 from .models import Applications, Contracts, Departments, \
-    DocumentsTypes, EducationType, Log, Orders, \
+    DocumentsTypes, EducationType, Orders, \
     Passports, Positions, Workers
 from .forms import NewWorkerForm, PassportForm, NewAppForm, NewOrderForm, NewContractForm
 from django.http import HttpResponse
@@ -52,7 +52,12 @@ def new_worker2(request):
 def log(request):
     orders = Orders.objects.all()
     queryset = Orders.objects.filter(
-        Q(order__document_type__in=request.GET.getlist("document_type"))
+        Q(order__document_type__in=request.GET.getlist("document_type")) &
+        (
+            Q(order__worker__fio__contains=str(request.GET.get('search-order')).strip()) |
+            Q(order_date__contains=str(request.GET.get('search-order')).strip()) |
+            Q(order_number__contains=str(request.GET.get('search-order')).strip())
+        )
     )
     if queryset:
         context = {'orders': queryset}
@@ -65,7 +70,12 @@ def log(request):
 def applications(request):
     applications = Applications.objects.all()
     queryset = Applications.objects.filter(
-        Q(document_type__in=request.GET.getlist("document_type"))
+        Q(document_type__in=request.GET.getlist("document_type")) &
+        (
+            Q(worker__fio__contains=str(request.GET.get('search-order')).strip()) |
+            Q(application_date__contains=str(request.GET.get('search-order')).strip()) |
+            Q(application_number__contains=str(request.GET.get('search-order')).strip())
+        )
     )
     if queryset:
         context = {'applications': queryset}
@@ -84,7 +94,12 @@ def worker_detail(request, worker_id):
 def orders(request):
     orders = Orders.objects.all()
     queryset = Orders.objects.filter(
-        Q(order__document_type__in=request.GET.getlist("document_type"))
+        Q(order__document_type__in=request.GET.getlist("document_type")) &
+        (
+            Q(order__worker__fio__contains=str(request.GET.get('search-order')).strip()) |
+            Q(order_date__contains=str(request.GET.get('search-order')).strip()) |
+            Q(order_number__contains=str(request.GET.get('search-order')).strip())
+        )
     )
     if queryset:
         context = {'orders': queryset}
@@ -96,8 +111,18 @@ def orders(request):
 
 def contracts(request):
     contracts = Contracts.objects.all()
-    context = {'contracts': contracts}
-    return render(request, 'manager/contracts.html', context)
+    queryset = Contracts.objects.filter(
+        Q(status__in=request.GET.getlist("status")) |
+        Q(worker__fio__contains=str(request.GET.get('search-order')).strip()) |
+        Q(contract_number__contains=str(request.GET.get('search-order')).strip()) |
+        Q(worker__position__position_name__contains=str(request.GET.get('search-order')).strip())
+    )
+    if queryset:
+        context = {'contracts': queryset}
+        return render(request, 'manager/contracts.html', context)
+    else:
+        context = {'contracts': contracts}
+        return render(request, 'manager/contracts.html', context)
 
 
 def order_print(request, worker_id):
