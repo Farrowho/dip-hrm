@@ -39,6 +39,7 @@
                             <li><a href="{% url 'contracts' %}"><button class = 'btn btn-dark'><i class="fa-regular fa-eye"></i> Посмотреть договоры </button></a></li>
                             <li><a href="{% url 'new_contract' %}"><button class = 'btn btn-dark'><i class="fa-regular fa-square-plus"></i> Добавить трудовой договор </button></a></li>
                     </ul>
+
                 <hr>
                    {% if user.is_authenticated %}
                      <li>Профиль: {{ user.get_username }}</li>

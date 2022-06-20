@@ -31,6 +31,7 @@ urlpatterns = [
     path('applications/filter/', views.applications, name='filter'),
     path('orders/filter/', views.orders, name='filter_orders'),
     path('log/filter/', views.log, name='filter_log'),
+    path('not_for_hr/', views.not_for_hr, name='not_for_hr'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += [

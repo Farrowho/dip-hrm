@@ -224,3 +224,14 @@ def perevod(request):
 
 def uval(request):
     pass
+
+
+def not_for_hr(request):
+    form = NewAppForm()
+    if request.method == 'POST':
+        form = NewAppForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+
+    context = {'form': form}
+    return render(request, 'manager/not_for_hr.html', context)

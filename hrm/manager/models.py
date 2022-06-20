@@ -3,17 +3,18 @@ from django.db import models
 
 class Applications(models.Model):
     application_id = models.AutoField(primary_key=True)
-    application_number = models.CharField(unique=True, max_length=12)
-    document_type = models.ForeignKey('DocumentsTypes', models.DO_NOTHING)
-    worker = models.ForeignKey('Workers', models.DO_NOTHING)
-    application_date = models.DateField()
-    application_pdf_path = models.FileField(upload_to='files/', null=True, verbose_name="")
+    application_number = models.CharField(unique=True, max_length=12, verbose_name='Номер заявления')
+    document_type = models.ForeignKey('DocumentsTypes', models.DO_NOTHING, verbose_name='Тип документа')
+    worker = models.ForeignKey('Workers', models.DO_NOTHING, verbose_name='ФИО сотрудника')
+    application_date = models.DateField(verbose_name='Дата заявления')
+    application_pdf_path = models.FileField(upload_to='files/', null=True, verbose_name="Файл")
 
     class Meta:
         managed = False
         db_table = 'applications'
         verbose_name = 'заявление'
         verbose_name_plural = 'Заявления'
+        ordering = ['-application_id']
 
 
 class AuthGroup(models.Model):
@@ -97,6 +98,7 @@ class Contracts(models.Model):
         db_table = 'contracts'
         verbose_name = 'договор'
         verbose_name_plural = 'Договоры'
+        ordering = ['-contract_id']
 
     def __str__(self):
         return self.contract_number
@@ -214,6 +216,7 @@ class Orders(models.Model):
         db_table = 'orders'
         verbose_name = 'приказ'
         verbose_name_plural = 'Приказы'
+        ordering = ['-order']
 
 
 class Passports(models.Model):
@@ -273,6 +276,7 @@ class Workers(models.Model):
         unique_together = (('inn', 'phone', 'mail', 'work_book_number'),)
         verbose_name = 'работника'
         verbose_name_plural = 'Работники'
+        ordering = ['worker_id']
 
     def __str__(self):
         return self.fio
