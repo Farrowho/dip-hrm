@@ -16,6 +16,9 @@ class Applications(models.Model):
         verbose_name_plural = 'Заявления'
         ordering = ['-application_id']
 
+    def __str__(self):
+        return self.application_number
+
 
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
@@ -88,10 +91,10 @@ class AuthUserUserPermissions(models.Model):
 
 class Contracts(models.Model):
     contract_id = models.AutoField(primary_key=True)
-    contract_number = models.CharField(max_length=11)
-    worker = models.ForeignKey('Workers', models.DO_NOTHING)
-    status = models.IntegerField()
-    contract_pdf_path = models.FileField(upload_to='files/', null=True, verbose_name="")
+    contract_number = models.CharField(max_length=11, verbose_name='Номер договора')
+    worker = models.ForeignKey('Workers', models.DO_NOTHING, verbose_name='ФИО сотрудника')
+    status = models.IntegerField(verbose_name='Статус договора')
+    contract_pdf_path = models.FileField(upload_to='files/', null=True, verbose_name="Файл")
 
     class Meta:
         managed = False
@@ -206,10 +209,10 @@ class Log(models.Model):
 
 
 class Orders(models.Model):
-    order = models.OneToOneField(Applications, models.DO_NOTHING, primary_key=True)
-    order_number = models.IntegerField(unique=True)
-    order_date = models.DateField()
-    order_pdf = models.FileField(upload_to='files/', null=True, verbose_name="")
+    order = models.OneToOneField(Applications, models.DO_NOTHING, primary_key=True, verbose_name='Номер заявления (основание)')
+    order_number = models.IntegerField(unique=True, verbose_name='Номер приказа')
+    order_date = models.DateField(verbose_name='Дата приказа')
+    order_pdf = models.FileField(upload_to='files/', null=True, verbose_name="Файл")
 
     class Meta:
         managed = False
@@ -220,15 +223,15 @@ class Orders(models.Model):
 
 
 class Passports(models.Model):
-    passport = models.OneToOneField('Workers', models.DO_NOTHING, primary_key=True)
-    seriya = models.CharField(max_length=5)
-    nomer = models.CharField(unique=True, max_length=6)
-    vidacha_date = models.DateField()
-    podrazd_code = models.CharField(max_length=7)
-    kem_vidan = models.CharField(max_length=64)
-    birthday = models.DateField()
-    birth_place = models.CharField(max_length=40)
-    region_name = models.CharField(max_length=40)
+    passport = models.OneToOneField('Workers', models.DO_NOTHING, primary_key=True, verbose_name='ФИО')
+    seriya = models.CharField(max_length=5, verbose_name='Серия')
+    nomer = models.CharField(unique=True, max_length=6, verbose_name='Номер')
+    vidacha_date = models.DateField(verbose_name='Дата выдачи')
+    podrazd_code = models.CharField(max_length=7, verbose_name='Код подразделения')
+    kem_vidan = models.CharField(max_length=64, verbose_name='Кем выдан')
+    birthday = models.DateField(verbose_name='Дата рождения')
+    birth_place = models.CharField(max_length=40, verbose_name='Место рождения')
+    region_name = models.CharField(max_length=40, verbose_name='Регион')
 
     class Meta:
         managed = False
@@ -258,17 +261,17 @@ class Positions(models.Model):
 
 class Workers(models.Model):
     worker_id = models.AutoField(primary_key=True)
-    card_number = models.CharField(max_length=20)
-    fio = models.CharField(db_column='FIO', max_length=60)  # Field name made lowercase.
-    position = models.ForeignKey(Positions, models.DO_NOTHING)
-    adress_fact = models.CharField(max_length=64)
-    education_type = models.ForeignKey(EducationType, models.DO_NOTHING)
-    education_spec = models.CharField(max_length=30)
-    inn = models.CharField(db_column='INN', max_length=10)  # Field name made lowercase.
-    phone = models.CharField(max_length=18)
-    mail = models.CharField(max_length=40)
-    work_start_date = models.DateField()
-    work_book_number = models.CharField(max_length=18)
+    card_number = models.CharField(max_length=20, verbose_name='Табельный номер')
+    fio = models.CharField(db_column='FIO', max_length=60, verbose_name='ФИО')  # Field name made lowercase.
+    position = models.ForeignKey(Positions, models.DO_NOTHING, verbose_name='Позиция')
+    adress_fact = models.CharField(max_length=64, verbose_name='Адрес проживания')
+    education_type = models.ForeignKey(EducationType, models.DO_NOTHING, verbose_name='Тип образования')
+    education_spec = models.CharField(max_length=30, verbose_name='Специальность')
+    inn = models.CharField(db_column='INN', max_length=10, verbose_name='ИНН')  # Field name made lowercase.
+    phone = models.CharField(max_length=18, verbose_name='Телефон')
+    mail = models.CharField(max_length=40, verbose_name='Почта')
+    work_start_date = models.DateField(verbose_name='Дата начала работы')
+    work_book_number = models.CharField(max_length=18, verbose_name='Номер трудовой книжки')
 
     class Meta:
         managed = False
