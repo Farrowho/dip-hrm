@@ -43,6 +43,7 @@
             <th scope="col">Дата заявления</th>
             <th scope="col">PDF</th>
             <th scope="col">< </th>
+            <th scope="col">Статус </th>
         </tr>
     </thead>
     <tbody>
@@ -54,6 +55,11 @@
             <td>{{ app.application_date }}</td>
             <td><a href="/media/{{ app.application_pdf_path }}" target="_blank"> Файл </a></td>
             <td><a href="/new_app/{{ app.application_id }}" target="_blank"><i class="fa-regular fa-pen-to-square"></i></a></td>
+                {% if app.application_id in order_id_list %}
+                    <td><i class="fa-solid fa-circle-check" style="color:green; padding-left: 25px;"></i></td>
+                {% else %}
+                    <td><i class="fa-solid fa-circle-xmark" style="color:red; padding-left: 25px;"></i></td>
+                {% endif %}
         </tr>
             {% endfor %}
     </tbody>

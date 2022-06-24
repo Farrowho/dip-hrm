@@ -1,14 +1,10 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
-from .models import Applications, Contracts, Departments, \
-    DocumentsTypes, EducationType, Orders, \
-    Passports, Positions, Workers
+from .models import Applications, Contracts, Departments, Orders, Passports, Workers
 from .forms import NewWorkerForm, PassportForm, NewAppForm, NewOrderForm, NewContractForm
-from django.http import HttpResponse
 
 
 def home(request):
-    """Рендер главной страницы"""
     departments = Departments.objects.all()
     passports = Passports.objects.all()
     workers = Workers.objects.all()
@@ -68,6 +64,7 @@ def log(request):
 
 
 def applications(request):
+    order_id_list = Orders.objects.values_list('order',flat=True)
     applications = Applications.objects.all()
     queryset = Applications.objects.filter(
         Q(document_type__in=request.GET.getlist("document_type")) &
@@ -78,10 +75,10 @@ def applications(request):
         )
     )
     if queryset:
-        context = {'applications': queryset}
+        context = {'applications': queryset, 'order_id_list': order_id_list}
         return render(request, 'manager/applications.html', context)
     else:
-        context = {'applications': applications}
+        context = {'applications': applications, 'order_id_list': order_id_list}
         return render(request, 'manager/applications.html', context)
 
 
