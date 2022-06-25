@@ -209,7 +209,8 @@ class Log(models.Model):
 
 
 class Orders(models.Model):
-    order = models.OneToOneField(Applications, models.DO_NOTHING, primary_key=True, verbose_name='Номер заявления (основание)')
+    order = models.OneToOneField(Applications, models.DO_NOTHING, primary_key=True, verbose_name='Номер заявления ('
+                                                                                                 'основание)')
     order_number = models.IntegerField(unique=True, verbose_name='Номер приказа')
     order_date = models.DateField(verbose_name='Дата приказа')
     order_pdf = models.FileField(upload_to='files/', null=True, verbose_name="Файл")
